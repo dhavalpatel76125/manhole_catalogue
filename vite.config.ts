@@ -8,7 +8,7 @@ import { sharingTags } from './src/lib/socialMetadata'
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_')
   const png = readFileSync(new URL('./public/yorvis-share.png', import.meta.url))
-  const sharing = sharingTags(env.VITE_SITE_URL, { width: png.readUInt32BE(16), height: png.readUInt32BE(20) })
+  const sharing = sharingTags(env.VITE_SITE_URL || 'https://manhole-catalogue.vercel.app', { width: png.readUInt32BE(16), height: png.readUInt32BE(20) })
   if (command === 'build' && !sharing.origin) {
     console.warn('Link-preview image is ready. Set VITE_SITE_URL to the final HTTPS domain and rebuild to enable image previews on shared links.')
   }
@@ -19,6 +19,6 @@ export default defineConfig(({ mode, command }) => {
         return [...sharing.tags, ...(sharing.origin ? [{ tag: 'link', attrs: { rel: 'canonical', href: sharing.origin }, injectTo: 'head' as const }] : [])]
       },
     }],
-    test: { environment: 'node', include: ['src/**/*.test.{ts,tsx}'] },
+    test: { environment: 'node', include: ['src/**/*.test.{ts,tsx}', 'server/**/*.test.ts'] },
   }
 })

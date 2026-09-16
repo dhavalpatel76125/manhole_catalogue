@@ -1,5 +1,7 @@
 # YORVIS product catalogue
 
+> **Current deployment: online admin on Vercel.** The owner subsequently requested an online editor. The production build now includes authenticated Vercel API functions and uses private Vercel Blob storage for JSON and images. Follow [Online admin setup](docs/online-admin-setup.md) to connect storage and create the administrator. The sections below describe the earlier static workflow and the retained local editor; claims that production excludes all admin code apply only to that earlier version. A static ZIP cannot deploy the new API.
+
 A static React + Vite + TypeScript + Tailwind website with a local product editor. Arial throughout. No Supabase account, database, API server or runtime backend is needed.
 
 ## Agreed JSON architecture

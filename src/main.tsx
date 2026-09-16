@@ -1,12 +1,14 @@
 import { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ADMIN_PATH } from './lib/config'
+import { ADMIN_PATH, ONLINE_MODE } from './lib/config'
 import Catalogue from './pages/Catalogue'
 import './styles.css'
 
-const Admin = import.meta.env.DEV ? lazy(() => import('./pages/Admin')) : null
+const OnlineAdmin = lazy(() => import('./pages/OnlineAdmin'))
+const LocalAdmin = import.meta.env.DEV ? lazy(() => import('./pages/Admin')) : null
+const Admin = ONLINE_MODE ? OnlineAdmin : LocalAdmin
 const path = window.location.pathname.replace(/\/$/, '') || '/'
-const admin = import.meta.env.DEV && (path === ADMIN_PATH || path === `${ADMIN_PATH}/login`)
+const admin = (ONLINE_MODE || import.meta.env.DEV) && (path === ADMIN_PATH || path === `${ADMIN_PATH}/login`)
 if (admin) {
   document.title = 'YORVIS | Administration'
   const robots = document.createElement('meta'); robots.name = 'robots'; robots.content = 'noindex, nofollow'; document.head.appendChild(robots)

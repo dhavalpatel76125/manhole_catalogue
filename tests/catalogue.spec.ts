@@ -5,7 +5,7 @@ import { unzipSync, strFromU8 } from 'fflate'
 const products = Array.from({ length: 26 }, (_, i) => ({ id: `00000000-0000-4000-8000-${String(i + 1).padStart(12, '0')}`, title: `${i + 1}W LED Test Light`, product_code: `YRV-${String(i + 1).padStart(3, '0')}`, image_path: `test-${i}.png`, image_url: `/catalogue/images/test-${i}.png`, display_order: i, is_active: i !== 25, price: i === 0 ? 100 : null, created_at: '2026-01-01T00:00:00Z', updated_at: '2026-01-01T00:00:00Z' }))
 const pixel = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a6o0AAAAASUVORK5CYII=', 'base64')
 async function seedPublic(page: Page, data = products) {
-  await page.route('**/catalogue/products.json', route => route.fulfill({ json: { version: 1, products: data } }))
+  await page.route('**/api/catalogue', route => route.fulfill({ json: { version: 1, products: data } }))
   await page.route('**/catalogue/images/*', route => route.fulfill({ contentType: 'image/png', body: pixel }))
 }
 test('search, pagination, independent counters, exact WhatsApp popup and no public editor', async ({ page, context }) => {
@@ -29,7 +29,9 @@ test('search, pagination, independent counters, exact WhatsApp popup and no publ
   await page.getByRole('textbox', { name: 'Search products', exact: true }).fill('not found'); await expect(page.getByRole('heading', { name: 'No products found' })).toBeVisible()
   await page.getByRole('button', { name: 'Clear search', exact: true }).first().click(); await expect(page.getByTestId('product-card')).toHaveCount(12)
   await expect(page.locator('a[href*="hdhd"]')).toHaveCount(0)
-  await page.goto('/hdhdhdhhdhdcurioo'); await expect(page.getByRole('heading', { name: 'Page not found' })).toBeVisible()
+  await page.route('**/api/catalogue?action=session', route => route.fulfill({ json: { authenticated: false, needsSetup: false } }))
+  await page.goto('/hdhdhdhhdhdcurioo'); await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Add product', exact: true })).toHaveCount(0)
 })
 for (const [width, columns] of [[1440, 4], [1100, 3], [768, 2], [390, 1]]) {
   test(`${width}px shows ${columns} columns and 12 products`, async ({ page }) => {
@@ -42,7 +44,7 @@ for (const [width, columns] of [[1440, 4], [1100, 3], [768, 2], [390, 1]]) {
 }
 test('empty and failure states', async ({ page }) => {
   await seedPublic(page, []); await page.goto('/'); await expect(page.getByRole('heading', { name: 'Our catalogue is taking shape' })).toBeVisible()
-  await page.route('**/catalogue/products.json', route => route.fulfill({ status: 500 })); await page.reload(); await expect(page.getByRole('heading', { name: 'We couldn’t load the catalogue' })).toBeVisible()
+  await page.route('**/api/catalogue', route => route.fulfill({ status: 500 })); await page.reload(); await expect(page.getByRole('heading', { name: 'We couldn’t load the catalogue' })).toBeVisible()
 })
 
 async function getWorkspace(page: Page) {

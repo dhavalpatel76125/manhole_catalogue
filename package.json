@@ -12,10 +12,12 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@vercel/blob": "^2.8.0",
     "fflate": "^0.8.2",
     "lucide-react": "^0.468.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

@@ -9,4 +9,4 @@ for (const file of assets.filter(p => p.endsWith('.js'))) {
     if (code.includes(forbidden)) throw new Error(`Release contains development-only code: ${forbidden}`)
   }
 }
-console.log('Release verified: no local editor or sample-product code.')
+console.log('Release verified: online admin included; no local editor or sample-product code.')
