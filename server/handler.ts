@@ -1,10 +1,10 @@
 import { randomBytes, randomUUID } from 'node:crypto'
 import sharp from 'sharp'
-import type { Product } from '../src/types'
-import { parseCatalogue, validateProduct } from '../shared/catalogue'
-import type { CatalogueStore } from './store'
-import { ConflictError } from './store'
-import { checkSession, createSession, digest, equalSecret, hashPassword, rateLimit, sessionCookie, sessionToken, verifyPassword, type AdminAccount } from './security'
+import type { Product } from '../src/types.js'
+import { parseCatalogue, validateProduct } from '../shared/catalogue.js'
+import type { CatalogueStore } from './store.js'
+import { ConflictError } from './store.js'
+import { checkSession, createSession, digest, equalSecret, hashPassword, rateLimit, sessionCookie, sessionToken, verifyPassword, type AdminAccount } from './security.js'
 
 interface State { version: 1; revision: number; products: Product[]; garbage: string[] }
 interface Configuration { origin: string; email: string; setupToken: string; configured: boolean; now?: () => number; initialProducts?: Product[] }

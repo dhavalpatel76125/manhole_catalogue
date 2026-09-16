@@ -1,4 +1,4 @@
-import type { Product, ProductInput } from '../src/types'
+import type { Product, ProductInput } from '../src/types.js'
 
 export function validateProduct(input: ProductInput): ProductInput {
   if (!input || typeof input.title !== 'string' || !(input.product_code === null || typeof input.product_code === 'string') || typeof input.is_active !== 'boolean') throw new Error('Invalid product fields.')

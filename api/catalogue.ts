@@ -1,7 +1,7 @@
-import { BlobStore } from '../server/store'
-import { createHandler } from '../server/handler'
-import initial from '../public/catalogue/products.json'
-import { parseCatalogue } from '../shared/catalogue'
+import { BlobStore } from '../server/store.js'
+import { createHandler } from '../server/handler.js'
+import initial from '../public/catalogue/products.json' with { type: 'json' }
+import { parseCatalogue } from '../shared/catalogue.js'
 
 const handler = createHandler(new BlobStore(), {
   origin: process.env.APP_ORIGIN || 'https://manhole-catalogue.vercel.app',

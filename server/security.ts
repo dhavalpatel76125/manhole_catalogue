@@ -1,7 +1,7 @@
 import { createHash, randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto'
 import { promisify } from 'node:util'
-import type { CatalogueStore } from './store'
-import { ConflictError } from './store'
+import type { CatalogueStore } from './store.js'
+import { ConflictError } from './store.js'
 
 const scrypt = promisify(scryptCallback)
 export const SESSION_SECONDS = 8 * 60 * 60
