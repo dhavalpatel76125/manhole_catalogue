@@ -33,7 +33,7 @@ Sign in, then add, edit, upload/replace images, activate/deactivate, reorder or 
 
 Images are processed on the client and revalidated/re-encoded on the server. Original browser selections may be up to 5 MB; compressed online uploads must fit within 3 MB so the multipart request stays below Vercel's function payload limit. Unsupported or corrupt files are rejected. The server preserves aspect ratio and limits images to 1600 pixels on the longest edge.
 
-The first online catalogue starts from `public/catalogue/products.json`, which is currently empty. Drafts previously saved in the local editor are not automatically uploaded. Add those products through the online editor when ready; the local draft remains in its original browser.
+The first online catalogue starts from `public/catalogue/products.json`, which currently contains 10 explicitly labeled `[TEST]` products with illustrated images and no prices. These were published for testing and should be replaced with real products before customer use. Once a catalogue has been saved to Blob, that saved catalogue takes precedence over this initial JSON. Drafts previously saved in the local editor are not automatically uploaded; the local draft remains in its original browser.
 
 ## Security and persistence
 
