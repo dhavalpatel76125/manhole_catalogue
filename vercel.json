@@ -1,5 +1,5 @@
 {
-  "rewrites": [{ "source": "/((?!api/|assets/|catalogue/|favicon.svg|fibro-logo.png|fibro-catalogue-share-v1.png|yorvis-share.png).*)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/((?!api/|assets/|catalogue/|favicon.svg|fibro-logo.png|fibro-catalogue-share-v1.png|fibro-catalogue-share-v2.jpg|yorvis-share.png).*)", "destination": "/index.html" }],
   "functions": { "api/catalogue.ts": { "maxDuration": 60 } },
   "headers": [{ "source": "/(.*)", "headers": [
     { "key": "X-Content-Type-Options", "value": "nosniff" },

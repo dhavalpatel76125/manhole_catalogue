@@ -1,20 +1,23 @@
 # FIBRO social preview image
 
-- Asset: `public/fibro-catalogue-share-v1.png`.
+- Sharing asset: `public/fibro-catalogue-share-v2.jpg`, a 1200 × 630 baseline sRGB JPEG, 97,687 bytes.
+- Source artwork: `public/fibro-catalogue-share-v1.png`, preserved unchanged.
 - Brand: FIBRO INNOVATION SYSTEM; supplied blue/green FIS logo.
 - Visible copy: Product Catalogue / FRP MANHOLE COVERS.
 - Method: built-in `image_gen` tool, using `public/fibro-logo.png` as the reference.
 - Original output: `exec-c3f7a24e-7046-40b2-bbc2-57fe0916dead.png`, copied unchanged into the project.
-- Actual dimensions: 1731 × 908 PNG.
+- Source dimensions: 1731 × 908 PNG, 1,166,069 bytes. The delivery JPEG keeps the same artwork and uses a white background, quality 84, 4:4:4 chroma sampling and non-progressive encoding for compatibility.
 - The legacy `public/yorvis-share.png` path contains the same FIBRO artwork so older image URLs no longer serve the previous branding.
-- Open Graph and Twitter metadata are injected into static HTML at build time. PNG dimensions are read from the actual asset, and the new image filename prevents reuse of the previous image URL.
+- Open Graph and Twitter metadata are injected into static HTML at build time. Format and dimensions are checked from the actual JPEG, and the new image filename prevents reuse of the previous image URL.
 - Inspection: checked the FIS mark, company spelling, FRP wording, landscape composition and legibility at thumbnail size. The artwork makes no product-performance claims.
 
 ## Verification
 
 Run `npm test`, `npm run build`, and `node scripts/test-sharing-build.mjs`. After deployment, verify the raw HTML title, description and image URL, plus the image's HTTP content type and dimensions. Verify the same responses using a WhatsApp user agent. These checks validate what the site serves; they do not control WhatsApp's cached or previously sent messages.
 
-For a fresh sharing attempt, use `https://manhole-catalogue.vercel.app/?v=fibro-20260917`. The ordinary homepage remains the canonical URL. Previously sent previews may retain the old artwork; do not promise they will update automatically.
+The original 1.17 MB PNG and HTML returned HTTP 200 to WhatsApp and Meta user agents. After initially reporting a text-only preview on both clients, the user confirmed mobile was showing the image; desktop remained the reported issue. The smaller JPEG reduces download size and removes a potential decoder obstacle, without treating image size as a proven root cause. Successful HTTP checks alone do not prove WhatsApp displays the image.
+
+For a fresh sharing attempt, use `https://manhole-catalogue.vercel.app/?v=fibro-preview-2`. The ordinary homepage remains the canonical URL. Previously sent previews may retain the old artwork; do not promise they will update automatically.
 
 ## Final generation prompt
 
