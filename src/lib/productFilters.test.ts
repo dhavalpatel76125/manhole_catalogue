@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { matchingProducts, productOptions } from './productFilters'
+import { compareSizes, matchingProducts, productOptions } from './productFilters'
 import { parseCatalogue, validateProduct } from '../../shared/catalogue'
 import { whatsappUrl } from './catalogue'
 import type { Product } from '../types'
@@ -17,8 +17,23 @@ describe('Fibro catalogue data flow', () => {
  })
  it('adds new admin values to options and deduplicates spacing and case', () => {
   const rows=[base,{...base,size:'24x24 INCH'},{...base,size:'300 × 300 mm',load_capacity:'60 ton'}]
-  expect(productOptions(rows,'size')).toEqual(['24 × 24 inch','300 × 300 mm'])
+  expect(productOptions(rows,'size')).toEqual(['300 × 300 mm','24 × 24 inch'])
   expect(productOptions(rows,'load_capacity')).toEqual(['5 ton','60 ton'])
+ })
+ it('sorts small sizes first across units, rectangles and diameters without changing source order', () => {
+  const sizes = ['Custom', '30 × 30 inch', '600 mm diameter', '24 × 24 inch', '300 × 300 mm', '12 × 18 inch', '12 × 12 inch', null]
+  const rows = sizes.map((size, index) => ({...base, id:String(index), size}))
+  const expected = ['300 × 300 mm', '12 × 12 inch', '12 × 18 inch', '600 mm diameter', '24 × 24 inch', '30 × 30 inch', 'Custom', null]
+  expect(matchingProducts(rows, '').map(p => p.size)).toEqual(expected)
+  expect(productOptions(rows, 'size')).toEqual(expected.filter(Boolean))
+  expect(rows.map(p => p.size)).toEqual(sizes)
+  expect(compareSizes('24 x 18 INCH', '18 × 24 inch')).toBe(0)
+  expect(compareSizes('12 inch', '304.8 mm')).toBe(0)
+ })
+ it('keeps equal-sized variants in admin order and places unknown dimensions last', () => {
+  const rows = [{...base,id:'unknown',size:null},{...base,id:'first'},{...base,id:'second',size:'609.6 × 609.6 mm'}]
+  expect(matchingProducts(rows,'').map(p=>p.id)).toEqual(['first','second','unknown'])
+  expect(compareSizes('300x300', '5 inch')).toBeGreaterThan(0)
  })
  it('rejects malformed description and filter values on the shared server/client boundary', () => {
   for(const key of ['load_capacity','size','clear_opening','frame_size','cover_size']) {
