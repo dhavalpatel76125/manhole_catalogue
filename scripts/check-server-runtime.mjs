@@ -33,7 +33,7 @@ try {
     console.log('Plain Node API startup and unconfigured responses passed.');
   `
   const result = spawnSync(process.execPath, ['--input-type=module', '-e', check], {
-    cwd: root, stdio: 'inherit', env: { ...process.env, BLOB_READ_WRITE_TOKEN: '', ADMIN_SETUP_TOKEN: '' },
+    cwd: root, stdio: 'inherit', env: { ...process.env, BLOB_READ_WRITE_TOKEN: '', BLOB_STORE_ID: '', VERCEL_OIDC_TOKEN: '', ADMIN_SETUP_TOKEN: '' },
   })
   assert.equal(result.status, 0, 'The production API must start in plain Node.js')
 } finally {

@@ -8,7 +8,7 @@ Publishing code alone does not provision storage or create the admin account. Un
 
 ## Vercel project configuration
 
-1. In the Vercel project, open **Storage** and create/connect a **private Vercel Blob store**. Do not use a public store: it holds the catalogue, inactive products, password hash and sessions. Connecting it provides `BLOB_READ_WRITE_TOKEN` to the project.
+1. In the Vercel project, open **Storage** and create/connect a **private Vercel Blob store** for **Production**. Do not use a public store: it holds the catalogue, inactive products, password hash and sessions. Current connections use `BLOB_STORE_ID` with Vercel-managed OIDC authentication; existing connections using `BLOB_READ_WRITE_TOKEN` are also supported. Let the Blob SDK obtain and refresh OIDC credentials automatically; do not copy a short-lived OIDC token into a permanent environment variable. See the [Vercel Blob authentication documentation](https://vercel.com/docs/vercel-blob/using-blob-sdk).
 2. Set these Production environment variables:
 
 | Variable | Value |
@@ -33,7 +33,7 @@ Sign in, then add, edit, upload/replace images, activate/deactivate, reorder or 
 
 Images are processed on the client and revalidated/re-encoded on the server. Original browser selections may be up to 5 MB; compressed online uploads must fit within 3 MB so the multipart request stays below Vercel's function payload limit. Unsupported or corrupt files are rejected. The server preserves aspect ratio and limits images to 1600 pixels on the longest edge.
 
-The first online catalogue starts from `public/catalogue/products.json`, which currently contains 10 explicitly labeled `[TEST]` products with illustrated images and no prices. These were published for testing and should be replaced with real products before customer use. Once a catalogue has been saved to Blob, that saved catalogue takes precedence over this initial JSON. Drafts previously saved in the local editor are not automatically uploaded; the local draft remains in its original browser.
+The first online catalogue starts from `public/catalogue/products.json`, which contains the 84 imported FRP product entries. Once a catalogue has been saved to Blob, that saved catalogue takes precedence over this initial JSON. Drafts previously saved in the local editor are not automatically uploaded; the local draft remains in its original browser.
 
 ## Security and persistence
 
