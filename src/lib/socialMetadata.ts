@@ -1,5 +1,6 @@
-export const SHARE_TITLE = 'FIBRO INNOVATION SYSTEM | FRP Manhole Covers Catalogue'
-export const SHARE_DESCRIPTION = 'Explore the FIBRO INNOVATION SYSTEM FRP manhole cover catalogue. Browse products, select your quantity and enquire directly on WhatsApp.'
+export const SHARE_TITLE = 'FIBRO INNOVATION SYSTEM | Product Catalogue'
+export const SHARE_DESCRIPTION = 'Browse FRP manhole covers by load capacity and size. Choose your quantity and enquire directly on WhatsApp.'
+export const SHARE_IMAGE_PATH = '/fibro-catalogue-share-v1.png'
 
 export function normaliseSiteUrl(value: string | undefined): string | null {
   if (!value?.trim()) return null
@@ -27,7 +28,7 @@ export function sharingTags(siteUrl: string | undefined, imageSize: { width: num
     meta('name', 'twitter:description', SHARE_DESCRIPTION),
   ]
   if (origin) {
-    const image = new URL('/fibro-logo.png', origin).href
+    const image = new URL(SHARE_IMAGE_PATH, origin).href
     tags.push(
       meta('property', 'og:url', origin),
       meta('property', 'og:image', image),

@@ -1,12 +1,21 @@
-# YORVIS social preview image
+# FIBRO social preview image
 
-- Asset: `public/yorvis-share.png`
-- Method: built-in `image_gen` tool; no API/CLI fallback.
-- Original output: `exec-6bbb5a88-c0ee-416e-b826-75fec0ba8f67.png`
-- Actual output dimensions: 1731 × 909 PNG, copied unchanged into the project.
-- Purpose: thumbnail for the main catalogue URL, with Open Graph / Twitter metadata.
-- Inspection: checked the YORVIS spelling, product-catalogue wording, green/charcoal palette and unclipped typography. The design is abstract branding, not a representation of actual product inventory.
+- Asset: `public/fibro-catalogue-share-v1.png`.
+- Brand: FIBRO INNOVATION SYSTEM; supplied blue/green FIS logo.
+- Visible copy: Product Catalogue / FRP MANHOLE COVERS.
+- Method: built-in `image_gen` tool, using `public/fibro-logo.png` as the reference.
+- Original output: `exec-c3f7a24e-7046-40b2-bbc2-57fe0916dead.png`, copied unchanged into the project.
+- Actual dimensions: 1731 × 908 PNG.
+- The legacy `public/yorvis-share.png` path contains the same FIBRO artwork so older image URLs no longer serve the previous branding.
+- Open Graph and Twitter metadata are injected into static HTML at build time. PNG dimensions are read from the actual asset, and the new image filename prevents reuse of the previous image URL.
+- Inspection: checked the FIS mark, company spelling, FRP wording, landscape composition and legibility at thumbnail size. The artwork makes no product-performance claims.
+
+## Verification
+
+Run `npm test`, `npm run build`, and `node scripts/test-sharing-build.mjs`. After deployment, verify the raw HTML title, description and image URL, plus the image's HTTP content type and dimensions. Verify the same responses using a WhatsApp user agent. These checks validate what the site serves; they do not control WhatsApp's cached or previously sent messages.
+
+For a fresh sharing attempt, use `https://manhole-catalogue.vercel.app/?v=fibro-20260917`. The ordinary homepage remains the canonical URL. Previously sent previews may retain the old artwork; do not promise they will update automatically.
 
 ## Final generation prompt
 
-Create exactly one finished social-sharing preview image for the YORVIS LED lighting catalogue website. This is a landscape Open Graph link thumbnail, intended 1200 x 630 pixels, aspect ratio 1.905:1. Premium restrained B2B industrial catalogue branding matching an existing white/charcoal/forest-green website. Use a warm white background, dark charcoal Arial-style upright sans-serif typography, forest green accents. Large exact brand text 'YORVIS.' with the period green, plus a small dark green square containing a white uppercase Y to the left, matching the website's simple wordmark. Large clear heading 'Product Catalogue' and smaller exact text 'LED LIGHTING'. Keep all text generous, legible at thumbnail size, centrally safe from crops. On the right use refined abstract geometric beams of light, soft green and neutral tones, subtly evoking illumination; no physical products because actual product photographs have not been provided. Balanced spacious professional composition. No browser window, no mockup frame, no URL, no prices, no invented certifications, no seals, no promotional claims, no WhatsApp logo, no italic text, no extra words. Return a finished image suitable for publication, not a design sheet.
+Use case: compositing. Create exactly one final landscape social link-preview image for the FIBRO INNOVATION SYSTEM product catalogue website, intended aspect ratio 1200:630 (1.905:1). Input image 1 is the supplied authentic company logo, a supporting brand asset: preserve the exact FIS blue letterforms, bright green upward arrow, proportions, gradients and company name without redesigning or misspelling. Create a clean, polished white/light-neutral industrial catalogue card. Feature the supplied FIS logo prominently with ample safe margins; avoid the source image's excessive empty margins. Arrange the exact company name FIBRO INNOVATION SYSTEM clearly legible, with FIBRO in green and remaining words deep navy. Add large upright sans-serif text exactly 'Product Catalogue' and smaller text exactly 'FRP MANHOLE COVERS'. Use restrained navy, medium blue and fresh green accents matching the supplied logo; a subtle geometric panel on the right is enough. Make all words readable at WhatsApp thumbnail size, keep all content within a generous central safe area. No real or invented product photos, no YORVIS, no LED lighting, no claims, no certifications, no prices, no URL, no WhatsApp icon, no device or browser mockup. Return one finished flattened PNG artwork, not a layout sheet.
