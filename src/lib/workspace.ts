@@ -57,14 +57,14 @@ export async function exportWorkspace(workspace: Workspace, backup: boolean, pro
     files[`${folder}/images/${product.image_path}`] = new Uint8Array(await image.arrayBuffer())
   }
   files['README.txt'] = strToU8(backup
-    ? 'YORVIS PRIVATE DRAFT BACKUP\nContains active and inactive products. Do not publish this archive. Import it with the local editor.\n'
-    : 'YORVIS PUBLISHING BUNDLE\nOnly active products are included. Replace public/catalogue in the source project with this catalogue folder, then run npm run build and deploy dist. Or replace dist/catalogue before uploading the complete dist folder. Remove the old catalogue/images folder first to remove deleted/replaced images. Deploy atomically; never merge a bundle into an old deployment without removing obsolete images.\n')
+    ? 'FIBRO INNOVATION SYSTEM PRIVATE DRAFT BACKUP\nContains active and inactive products. Do not publish this archive. Import it with the local editor.\n'
+    : 'FIBRO INNOVATION SYSTEM PUBLISHING BUNDLE\nOnly active products are included. Replace public/catalogue in the source project with this catalogue folder, then run npm run build and deploy dist. Or replace dist/catalogue before uploading the complete dist folder. Remove the old catalogue/images folder first to remove deleted/replaced images. Deploy atomically; never merge a bundle into an old deployment without removing obsolete images.\n')
   progress('Creating ZIP…')
   const zipped = await new Promise<Uint8Array>((resolve, reject) => zip(files, { level: 1 }, (error, data) => error ? reject(error) : resolve(data)))
   return new Blob([new Uint8Array(zipped)], { type: 'application/zip' })
 }
 export async function importWorkspace(file: File): Promise<Omit<Workspace, 'revision'>> {
-  if (!/\.zip$/i.test(file.name) || file.size > 80 * 1024 * 1024) throw new Error('Choose a YORVIS ZIP archive of 80 MB or smaller.')
+  if (!/\.zip$/i.test(file.name) || file.size > 80 * 1024 * 1024) throw new Error('Choose a FIBRO INNOVATION SYSTEM ZIP archive of 80 MB or smaller.')
   let expanded = 0; let count = 0
   const files = unzipSync(new Uint8Array(await file.arrayBuffer()), { filter(entry) {
     expanded += entry.originalSize; count++
@@ -72,7 +72,7 @@ export async function importWorkspace(file: File): Promise<Omit<Workspace, 'revi
     return /^(draft|catalogue)\/(products\.json|images\/[a-zA-Z0-9_-]+\.(webp|png|jpg|jpeg))$/.test(entry.name)
   } })
   const folder = files['draft/products.json'] ? 'draft' : 'catalogue'
-  if (!files[`${folder}/products.json`]) throw new Error('The archive does not contain a YORVIS catalogue.')
+  if (!files[`${folder}/products.json`]) throw new Error('The archive does not contain a FIBRO INNOVATION SYSTEM catalogue.')
   const products = parseCatalogue(JSON.parse(strFromU8(files[`${folder}/products.json`])))
   const assets: Record<string, Blob> = {}
   for (const product of products) {

@@ -1,0 +1,796 @@
+{
+  "source": "FRP PHOTOS/FRP PHOTOS",
+  "photos": 104,
+  "imported": 84,
+  "review": [
+    {
+      "file": "1220X1220 MM GREY.jpeg",
+      "status": "held",
+      "reason": "No load capacity provided."
+    },
+    {
+      "file": "FRP 10 TON\\18X18 INCH 10T WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-001",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\24X24 INCH 10T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-002",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 10 TON\\24X36 INCH OUTER 19X31 CLEAR 10T WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-003",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\30X30 INCH 750X750MM OUTER 10 T.jpeg",
+      "status": "imported",
+      "code": "FIS-004",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 10 TON\\41X41 INCH 10T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-005",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\54X54 INCH 10T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-006",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\MANHOLE COVER 54X54 INCH 10 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-007",
+      "notes": [
+        "Annotated clear opening 1115 mm conflicts with the other 54-inch view (1155 mm); left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 10 TON\\WHITE 30X30INCH 750X750MM OUTER 10TON.jpeg",
+      "status": "imported",
+      "code": "FIS-008",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 12.5 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 12.5 TON\\400X900 MM CLEAR OPENING PHOTO.jpeg",
+      "status": "imported",
+      "code": "FIS-009",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\450X450 12.5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-010",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\450X450 12.5T YELLOW.jpeg",
+      "status": "imported",
+      "code": "FIS-011",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\450X900 MM PHOTO 12.5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-012",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\900X900 12.5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-013",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 12.5 TON\\900X900 MM 12.5 TON.jpeg",
+      "status": "duplicate",
+      "reason": "Exact duplicate in the same load capacity; one copy imported."
+    },
+    {
+      "file": "FRP 2.5 TON\\1000X1000 MM 2.5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-014",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 2.5 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING - Copy - Copy - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 2.5 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 2.5 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 2.5 TON\\42X42 2.5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-015",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 2.5 TON\\42X42 INCH 2.5 TON.jpeg",
+      "status": "duplicate",
+      "reason": "Exact duplicate in the same load capacity; one copy imported."
+    },
+    {
+      "file": "FRP 2.5 TON\\900X900 2.5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-016",
+      "notes": [
+        "Photo labels clear opening in inches; filename uses 900X900 without units. No exact unit conversion assumed.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 20 TON\\18X18 INCH 20TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-017",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 20 TON\\24X24 INCH 20 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-018",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 25 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 25 TON\\300X300 25TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-019",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 25 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 25 TON\\600X600 25 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-020",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 25 TON\\750X750 25TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-021",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 25 TON\\900X900 25TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-022",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 25 TON\\900X900 INCH 25 TON.jpeg",
+      "status": "duplicate",
+      "reason": "Exact duplicate in the same load capacity; one copy imported."
+    },
+    {
+      "file": "FRP 25 TON\\900x900 mm cl 1110x1110 op 25 ton non brand.jpeg",
+      "status": "imported",
+      "code": "FIS-023",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 40 TON\\300X300 40TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-024",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 40 TON\\450X450 40TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-025",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\450X450 40TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-026",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\600MM DIA 40 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-027",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\600X600 40 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-028",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 40 TON\\600X600 MM 40 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-029",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\1065X1065 INCH 5 TON WHITE.jpeg",
+      "status": "held",
+      "reason": "Conflicting or implausible dimensions/units in filename."
+    },
+    {
+      "file": "FRP 5 TON\\10X10 INCH (200X200)5 TON WHITE& GREY.jpeg",
+      "status": "held",
+      "reason": "Conflicting or implausible dimensions/units in filename."
+    },
+    {
+      "file": "FRP 5 TON\\12X12 INCH (300X300) 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-030",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\12X12 INCH (300X300)5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-031",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\12X18 INCH 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-032",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\12X18 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-033",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\15X15 INCH (375X375) 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-034",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\15X15 INCH (375X375)5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-035",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\15X15 INCH OUTER 13X13 INCH CLEAR 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-036",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\18X18 INCH  (450X450) 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-037",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\18X18 INCH (450X450)5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-038",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\18X18 INCH 5 TON WHITE & GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-039",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\18X24 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-040",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\21X21 INCH 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-041",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\21X21 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-042",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\24X24 5TON.jpeg",
+      "status": "imported",
+      "code": "FIS-043",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\24X24 INCH 5 TON WHITE& GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-044",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\24X24 INCH OUTER 20X20 INCH CLEAR OPENING - Copy - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 5 TON\\26X26 INCH OUTER 22X22 INCH CLEAR OPENING 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-045",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\28X28 INCH 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-046",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\28X28 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-047",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\28X28 INCH 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-048",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\30X30 INCH 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-049",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\30X30 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-050",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\30X30 INCH 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-051",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\30X30 INCH OUTER 28X28 INCH CLEAR 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-052",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\30X30 OUTER 24X24 INCH CLEAR OPENING - Copy - Copy - Copy - Copy - Copy.jpeg",
+      "status": "held",
+      "reason": "Identical photo is assigned to different load capacities. Confirm rating and dimensions."
+    },
+    {
+      "file": "FRP 5 TON\\36X36 INCH 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-053",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\36X36 INCH 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-054",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\36X36 INCH 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-055",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\36X36 INCH OUTER 30X30 INCH CLEAR 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-056",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\375X375 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-057",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\375X375 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-058",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\42X42 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-059",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\42X42 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-060",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\450X450 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-061",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\450X450 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-062",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\48X48 OUTER 42X42 CLEAR (1200X1200 MM) (1060X1060 MM).jpeg",
+      "status": "imported",
+      "code": "FIS-063",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\530X530 INCH 5 TON GREY.jpeg",
+      "status": "held",
+      "reason": "Conflicting or implausible dimensions/units in filename."
+    },
+    {
+      "file": "FRP 5 TON\\530X530 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-064",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\600X600 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-065",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\600X600 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-066",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\600X600 MM 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-067",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\600X600 MM CLEAR OPENING 700X700 MM FRAME SIZE 5 TON.jpeg",
+      "status": "imported",
+      "code": "FIS-068",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\660X660 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-069",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\700X700 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-070",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\700X700 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-071",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\750X750 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-072",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\750X750 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-073",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\900X900 MM 5 TON GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-074",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\900X900 MM 5 TON WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-075",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 TON\\900X900 MM 5T.jpeg",
+      "status": "imported",
+      "code": "FIS-076",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\18X36 5 T WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-077",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\18X36 5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-078",
+      "notes": [
+        "Size unit is not explicit; size left blank.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\24X36 5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-079",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\24X36 5T WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-080",
+      "notes": [
+        "Size unit matched to another named view; verify the product variant.",
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\24X36 INCH 5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-081",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\30X30 INCH 5 T WHITE..jpeg",
+      "status": "imported",
+      "code": "FIS-082",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\450X760 MM 5T GREY.jpeg",
+      "status": "imported",
+      "code": "FIS-083",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    },
+    {
+      "file": "FRP 5 T\\450X760 MM 5T WHITE.jpeg",
+      "status": "imported",
+      "code": "FIS-084",
+      "notes": [
+        "Unverified description dimensions left blank; enter them in Admin."
+      ]
+    }
+  ]
+}

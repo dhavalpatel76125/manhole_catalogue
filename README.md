@@ -1,4 +1,8 @@
-# YORVIS product catalogue
+# FIBRO INNOVATION SYSTEM product catalogue
+
+The Fibro update adds the supplied FIS logo, capacity and size filters, responsive catalogue/admin layouts, structured product measurements and WhatsApp enquiries to +91 7990907899. The initial catalogue includes 84 FRP photos. See [source review and missing measurements](docs/frp-review.md). In Add/Edit product, type a new capacity or size or choose an existing suggestion; saved active values populate the catalogue dropdowns. Description fields are optional when dimensions need confirmation.
+
+The historical setup notes below describe the earlier YORVIS version. The local preview now uses the imported FRP catalogue with demo mode disabled. Existing live storage is preserved and requires a separate content migration when publishing.
 
 > **Current deployment: online admin on Vercel.** The owner subsequently requested an online editor. The production build now includes authenticated Vercel API functions and uses private Vercel Blob storage for JSON and images. Follow [Online admin setup](docs/online-admin-setup.md) to connect storage and create the administrator. The sections below describe the earlier static workflow and the retained local editor; claims that production excludes all admin code apply only to that earlier version. A static ZIP cannot deploy the new API.
 

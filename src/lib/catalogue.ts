@@ -2,8 +2,9 @@ import { WHATSAPP_NUMBER } from './config'
 export { validateProduct } from '../../shared/catalogue'
 
 export function clampQuantity(value: number) { return Math.max(1, Math.min(999, Math.trunc(value) || 1)) }
-export function whatsappUrl(title: string, quantity: number) {
-  const message = `Hello, I want to buy ${title}. Quantity: ${clampQuantity(quantity)}. Please share the price and availability.`
+export function whatsappUrl(title: string, quantity: number, details?: { product_code?: string | null; load_capacity?: string | null; size?: string | null }) {
+  const info = details ? [details.product_code && `Product code: ${details.product_code}`, details.load_capacity && `Load capacity: ${details.load_capacity}`, details.size && `Size: ${details.size}`].filter(Boolean).join('. ') : ''
+  const message = `Hello, I want to buy ${title}. ${info ? info + '. ' : ''}Quantity: ${clampQuantity(quantity)}. Please share the price and availability.`
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 export function pageItems(page: number, total: number): (number | string)[] {

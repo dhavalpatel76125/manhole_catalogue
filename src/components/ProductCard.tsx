@@ -14,15 +14,17 @@ export function ProductCard({ product, quantity = 1, onQuantity, preview = false
       {failed ? <div className="image-fallback"><ImageOff size={30}/><span>Image unavailable</span></div> : <img src={product.image_url} alt={product.title} loading="lazy" width="480" height="360" onError={() => setFailed(true)} />}
     </div>
     <div className="product-body">
-      <div className="product-code">{product.product_code || 'YORVIS LED LIGHTING'}</div>
+      <div className="product-code">{product.product_code || 'FIBRO FRP COVERS'}</div>
       <h2 title={product.title}>{product.title}</h2>
+      <div className="product-tags">{product.load_capacity && <span>{product.load_capacity}</span>}{product.size && <span>{product.size}</span>}</div>
+      <dl className="product-description" aria-label="Description"><div><dt>Clear opening</dt><dd>{product.clear_opening || 'Not specified'}</dd></div><div><dt>Frame size</dt><dd>{product.frame_size || 'Not specified'}</dd></div><div><dt>Cover size</dt><dd>{product.cover_size || 'Not specified'}</dd></div></dl>
       <p className="price">{product.price !== null && new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price)}</p>
       <div className="quantity-row"><span>Quantity</span><div className="quantity-control">
         <button type="button" aria-label={`Decrease quantity for ${product.title}`} disabled={quantity <= 1 || preview} onClick={() => onQuantity?.(clampQuantity(quantity - 1))}><Minus size={14}/></button>
         <output aria-label={`Quantity for ${product.title}`}>{quantity}</output>
         <button type="button" aria-label={`Increase quantity for ${product.title}`} disabled={quantity >= 999 || preview} onClick={() => onQuantity?.(clampQuantity(quantity + 1))}><Plus size={14}/></button>
       </div></div>
-      <a className={`whatsapp-button ${preview ? 'is-disabled' : ''}`} href={preview ? undefined : whatsappUrl(product.title, quantity)} target="_blank" rel="noopener noreferrer" aria-disabled={preview || busy} onClick={event => { if (preview || busy) { event.preventDefault(); return }; setBusy(true); window.setTimeout(() => setBusy(false), 1000) }}>
+      <a className={`whatsapp-button ${preview ? 'is-disabled' : ''}`} href={preview ? undefined : whatsappUrl(product.title, quantity, product)} target="_blank" rel="noopener noreferrer" aria-disabled={preview || busy} onClick={event => { if (preview || busy) { event.preventDefault(); return }; setBusy(true); window.setTimeout(() => setBusy(false), 1000) }}>
         {busy ? <LoaderCircle className="spin" size={19}/> : <WhatsAppIcon/>}{busy ? 'Opening WhatsApp…' : 'Buy on WhatsApp'}
       </a>
     </div>

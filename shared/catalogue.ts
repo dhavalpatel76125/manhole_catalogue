@@ -7,7 +7,14 @@ export function validateProduct(input: ProductInput): ProductInput {
   if (title.length < 2 || title.length > 160 || /[\u0000-\u001f<>]/.test(title)) throw new Error('Enter a title of 2–160 characters without markup or control characters.')
   if (product_code && (product_code.length > 80 || /[\u0000-\u001f<>]/.test(product_code))) throw new Error('Product code must be 80 characters or fewer without markup or control characters.')
   if (input.price !== null && (typeof input.price !== 'number' || !Number.isFinite(input.price) || input.price < 0 || input.price > 999999999.99)) throw new Error('Enter a valid price between 0 and 999,999,999.99 or leave it blank.')
-  return { title, product_code, is_active: input.is_active, price: input.price === null ? null : Math.round(input.price * 100) / 100 }
+  const details: Partial<ProductInput> = {}
+  for (const key of ['load_capacity', 'size', 'clear_opening', 'frame_size', 'cover_size'] as const) {
+    if (input[key] === undefined) continue
+    const value = input[key]
+    if (value !== null && (typeof value !== 'string' || value.length > 80 || /[\u0000-\u001f<>]/.test(value))) throw new Error(`${key.replaceAll('_', ' ')} must be 80 characters or fewer without markup or control characters.`)
+    details[key] = value?.trim().replace(/\s+/g, ' ') || null
+  }
+  return { title, product_code, is_active: input.is_active, price: input.price === null ? null : Math.round(input.price * 100) / 100, ...details }
 }
 
 export function parseCatalogue(value: unknown): Product[] {

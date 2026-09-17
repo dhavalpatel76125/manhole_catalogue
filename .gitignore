@@ -9,3 +9,5 @@ test-results/
 .sites-runtime/
 *.log
 release/
+
+tmp/

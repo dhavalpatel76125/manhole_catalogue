@@ -1,5 +1,5 @@
-export const SHARE_TITLE = 'YORVIS | LED Lighting Catalogue'
-export const SHARE_DESCRIPTION = 'Explore the YORVIS LED lighting catalogue. Browse products, select your quantity and enquire directly on WhatsApp.'
+export const SHARE_TITLE = 'FIBRO INNOVATION SYSTEM | FRP Manhole Covers Catalogue'
+export const SHARE_DESCRIPTION = 'Explore the FIBRO INNOVATION SYSTEM FRP manhole cover catalogue. Browse products, select your quantity and enquire directly on WhatsApp.'
 
 export function normaliseSiteUrl(value: string | undefined): string | null {
   if (!value?.trim()) return null
@@ -18,7 +18,7 @@ export function sharingTags(siteUrl: string | undefined, imageSize: { width: num
   const meta = (attribute: 'property' | 'name', key: string, content: string) => ({ tag: 'meta', attrs: { [attribute]: key, content }, injectTo: 'head' as const })
   const tags = [
     meta('property', 'og:type', 'website'),
-    meta('property', 'og:site_name', 'YORVIS'),
+    meta('property', 'og:site_name', 'FIBRO INNOVATION SYSTEM'),
     meta('property', 'og:title', SHARE_TITLE),
     meta('property', 'og:description', SHARE_DESCRIPTION),
     meta('property', 'og:locale', 'en_IN'),
@@ -27,7 +27,7 @@ export function sharingTags(siteUrl: string | undefined, imageSize: { width: num
     meta('name', 'twitter:description', SHARE_DESCRIPTION),
   ]
   if (origin) {
-    const image = new URL('/yorvis-share.png', origin).href
+    const image = new URL('/fibro-logo.png', origin).href
     tags.push(
       meta('property', 'og:url', origin),
       meta('property', 'og:image', image),
@@ -35,9 +35,9 @@ export function sharingTags(siteUrl: string | undefined, imageSize: { width: num
       meta('property', 'og:image:type', 'image/png'),
       meta('property', 'og:image:width', String(imageSize.width)),
       meta('property', 'og:image:height', String(imageSize.height)),
-      meta('property', 'og:image:alt', 'YORVIS Product Catalogue — LED Lighting'),
+      meta('property', 'og:image:alt', 'FIBRO INNOVATION SYSTEM Product Catalogue — FRP Manhole Covers'),
       meta('name', 'twitter:image', image),
-      meta('name', 'twitter:image:alt', 'YORVIS Product Catalogue — LED Lighting'),
+      meta('name', 'twitter:image:alt', 'FIBRO INNOVATION SYSTEM Product Catalogue — FRP Manhole Covers'),
     )
   }
   return { origin, tags }

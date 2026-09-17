@@ -6,7 +6,7 @@ describe('catalogue rules', () => {
   it('clamps quantities to 1–999', () => { expect([-1, 0, 1, 2, 999, 1000, NaN].map(clampQuantity)).toEqual([1, 1, 1, 2, 999, 999, 1]) })
   it('encodes the exact WhatsApp message, including special characters', () => {
     const url = new URL(whatsappUrl('500W LED Lens Flood Light & "Pro"', 3))
-    expect(url.origin + url.pathname).toBe('https://wa.me/918320587916')
+    expect(url.origin + url.pathname).toBe('https://wa.me/917990907899')
     expect(url.searchParams.get('text')).toBe('Hello, I want to buy 500W LED Lens Flood Light & "Pro". Quantity: 3. Please share the price and availability.')
   })
   it('shows page boundaries and ellipses without duplicates', () => {

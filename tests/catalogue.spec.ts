@@ -19,7 +19,7 @@ test('search, pagination, independent counters, exact WhatsApp popup and no publ
   await context.route('https://wa.me/**', route => route.fulfill({ body: 'WhatsApp destination verified', contentType: 'text/plain' }))
   const popupPromise = context.waitForEvent('page'); await first.getByRole('link', { name: 'Buy on WhatsApp' }).click(); const popup = await popupPromise
   await popup.waitForLoadState()
-  expect(new URL(popup.url()).searchParams.get('text')).toBe('Hello, I want to buy 1W LED Test Light. Quantity: 3. Please share the price and availability.'); await popup.close()
+  expect(new URL(popup.url()).searchParams.get('text')).toBe('Hello, I want to buy 1W LED Test Light. Product code: YRV-001. Quantity: 3. Please share the price and availability.'); await popup.close()
   await page.getByRole('button', { name: 'Page 2', exact: true }).click(); await expect(page.getByTestId('product-card')).toHaveCount(12)
   await page.getByRole('button', { name: 'Next', exact: true }).click(); await expect(page.getByTestId('product-card')).toHaveCount(1)
   await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeDisabled()
@@ -64,6 +64,7 @@ async function addProduct(page: Page, name: string, file: Buffer) {
   await expect(page.getByRole('dialog')).toHaveCount(0)
 }
 test('local editor CRUD, image resize/replacement, persistence, ordering, visibility, preview and ZIP round trip', async ({ page }) => {
+  await page.route('**/catalogue/products.json', route => route.fulfill({json:{version:1,products:[]}}))
   await page.goto('http://127.0.0.1:5173/hdhdhdhhdhdcurioo')
   await expect(page.getByRole('heading', { name: 'Your catalogue starts here' })).toBeVisible()
   const image = Buffer.from(await page.evaluate(() => { const canvas = document.createElement('canvas'); canvas.width = 2400; canvas.height = 1200; const c = canvas.getContext('2d')!; c.fillStyle = '#c9d8c3'; c.fillRect(0, 0, 2400, 1200); return canvas.toDataURL('image/png').split(',')[1] }), 'base64')
@@ -94,6 +95,7 @@ test('local editor CRUD, image resize/replacement, persistence, ordering, visibi
   await page.screenshot({ path: 'test-results/editor-desktop.png', fullPage: true })
 })
 test('editor rejects invalid and oversized image files', async ({ page }) => {
+  await page.route('**/catalogue/products.json', route => route.fulfill({json:{version:1,products:[]}}))
   await page.goto('http://127.0.0.1:5173/hdhdhdhhdhdcurioo'); await page.getByRole('button', { name: 'Add product', exact: true }).first().click()
   await page.locator('input[type=file]').last().setInputFiles({ name: 'bad.svg', mimeType: 'image/svg+xml', buffer: Buffer.from('<svg/>') }); await expect(page.getByRole('alert')).toContainText('Choose a JPG')
   await page.locator('input[type=file]').last().setInputFiles({ name: 'large.png', mimeType: 'image/png', buffer: Buffer.alloc(5 * 1024 * 1024 + 1) }); await expect(page.getByRole('alert')).toContainText('5 MB')
@@ -109,6 +111,7 @@ test('sample preview screenshots', async ({ page }) => {
   expect(errors).toEqual([])
 })
 test('concurrent editor tabs cannot overwrite newer drafts', async ({ page, context }) => {
+  await page.route('**/catalogue/products.json', route => route.fulfill({json:{version:1,products:[]}}))
   await page.goto('http://127.0.0.1:5173/hdhdhdhhdhdcurioo')
   const image = Buffer.from(await page.evaluate(() => { const c = document.createElement('canvas'); c.width = 10; c.height = 10; return c.toDataURL('image/png').split(',')[1] }), 'base64')
   await addProduct(page, 'Concurrent Light', image)

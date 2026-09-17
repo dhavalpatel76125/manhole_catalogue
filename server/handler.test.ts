@@ -34,9 +34,9 @@ async function register() {
   expect(response.status).toBe(201)
   return response.headers.get('set-cookie')!.split(';')[0]
 }
-async function save(cookie: string, revision: number, title = 'LED Flood Light', id?: string, bytes?: Uint8Array) {
+async function save(cookie: string, revision: number, title = 'LED Flood Light', id?: string, bytes?: Uint8Array, details: Record<string, string> = {}) {
   const form = new FormData()
-  form.append('product', JSON.stringify({ id, revision, title, product_code: 'YRV-001', price: null, is_active: true }))
+  form.append('product', JSON.stringify({ id, revision, title, product_code: 'YRV-001', price: null, is_active: true, ...details }))
   if (!id || bytes) {
     const image = bytes || await sharp({ create: { width: 2000, height: 1000, channels: 3, background: '#f0f0f0' } }).png().toBuffer()
     form.append('image', new Blob([new Uint8Array(image)], { type: 'image/png' }), 'light.png')
@@ -129,4 +129,19 @@ describe('online catalogue operations', () => {
     expect((await (await handler(request('public'))).json()).products).toHaveLength(1)
     expect(store.images.size).toBe(1)
   })
+})
+
+it('persists Fibro filters and descriptions through create, edit, admin and public responses', async () => {
+ const cookie=await register()
+ const details={load_capacity:'60 ton',size:'800 × 800 mm',clear_opening:'700 × 700 mm',frame_size:'800 × 800 mm',cover_size:'750 × 750 mm'}
+ const created=await save(cookie,0,'FRP Cover',undefined,undefined,details)
+ expect(created.status).toBe(200)
+ const product=(await created.json()).products[0]
+ expect(product).toMatchObject(details)
+ const edited=await save(cookie,1,'FRP Cover',product.id,undefined,{...details,load_capacity:'65 ton',cover_size:'755 × 755 mm'})
+ expect(edited.status).toBe(200)
+ for(const action of ['admin','public']) {
+  const response=await handler(request(action,undefined,cookie))
+  expect((await response.json()).products[0]).toMatchObject({...details,load_capacity:'65 ton',cover_size:'755 × 755 mm'})
+ }
 })

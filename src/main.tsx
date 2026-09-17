@@ -10,7 +10,7 @@ const Admin = ONLINE_MODE ? OnlineAdmin : LocalAdmin
 const path = window.location.pathname.replace(/\/$/, '') || '/'
 const admin = (ONLINE_MODE || import.meta.env.DEV) && (path === ADMIN_PATH || path === `${ADMIN_PATH}/login`)
 if (admin) {
-  document.title = 'YORVIS | Administration'
+  document.title = 'FIBRO INNOVATION SYSTEM | Administration'
   const robots = document.createElement('meta'); robots.name = 'robots'; robots.content = 'noindex, nofollow'; document.head.appendChild(robots)
 }
 createRoot(document.getElementById('root')!).render(admin && Admin ? <Suspense fallback={<div className="page-loading" role="status">Loading…</div>}><Admin/></Suspense> : path === '/' ? <Catalogue/> : <main className="empty-state"><h1>Page not found</h1><a className="secondary-button" href="/">View catalogue</a></main>)
