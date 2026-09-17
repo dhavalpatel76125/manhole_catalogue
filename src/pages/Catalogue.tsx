@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Search, ArrowUpRight, PackageSearch, X, Grid2X2, RotateCw } from 'lucide-react'
+import { Search, ArrowUpRight, PackageSearch, X, RotateCw } from 'lucide-react'
 import { Brand } from '../components/Brand'
 import { ProductCard } from '../components/ProductCard'
 import { Pagination } from '../components/Pagination'
@@ -15,16 +15,14 @@ export default function Catalogue() {
   const { products, total, loading, error, refresh, capacities, sizes } = useProducts(search, page, false, capacity, size)
   const hasFilters = Boolean(search || capacity || size)
   const clearFilters = () => { setSearch(''); setCapacity(''); setSize(''); setPage(1) }
-  const heading = useRef<HTMLHeadingElement>(null)
+  const catalogueTop = useRef<HTMLElement>(null)
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE))
   useEffect(() => { if (!loading && !error && page > pages) setPage(pages) }, [pages, loading, error, page])
-  const changePage = (next: number) => { setPage(next); heading.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' }) }
+  const changePage = (next: number) => { setPage(next); catalogueTop.current?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' }) }
   return <>
-    <header className="site-header"><div className="header-inner"><Brand/><a className="header-descriptor" href="#catalogue">Product Catalogue</a><a className="contact-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">Contact us <ArrowUpRight size={16}/></a></div></header>
-    <main className="catalogue-shell" id="catalogue">
+    <header className="site-header catalogue-header"><div className="header-inner"><Brand/><h1 className="catalogue-heading" id="catalogue-title"><a href="#catalogue">Product Catalogue</a></h1><a className="contact-link" href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">Contact us <ArrowUpRight size={16}/></a></div></header>
+    <main className="catalogue-shell" id="catalogue" ref={catalogueTop} aria-labelledby="catalogue-title">
       {DEMO_MODE && <div className="demo-note">Development preview · Sample products and illustrations. Published catalogue uses your JSON file.</div>}
-      <div className="breadcrumb"><span>FIBRO</span><span>/</span>Catalogue</div>
-      <section className="catalogue-intro"><div><p className="eyebrow"><span/> FRP MANHOLE COVERS</p><h1 ref={heading}>Product Catalogue<span>.</span></h1><p className="intro-copy">Find the right cover. Select your load capacity and size.</p></div><div className="catalogue-label"><Grid2X2 size={17}/><span>Built for your project</span></div></section>
       <div className="catalogue-toolbar"><div className="catalogue-filters">
         <label className="filter-field">Load capacity<select aria-label="Load capacity" value={capacity} onChange={e => { setCapacity(e.target.value); setSize(''); setPage(1) }}><option value="">All load capacities</option>{capacities.map(value => <option key={value} value={value}>{value}</option>)}</select></label>
         <label className="filter-field">Size<select aria-label="Size" value={size} onChange={e => { setSize(e.target.value); setPage(1) }}><option value="">All sizes</option>{sizes.map(value => <option key={value} value={value}>{value}</option>)}</select></label>
