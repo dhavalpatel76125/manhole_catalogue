@@ -5,9 +5,11 @@ import { parseCatalogue, validateProduct } from '../shared/catalogue.js'
 import type { CatalogueStore } from './store.js'
 import { ConflictError } from './store.js'
 import { checkSession, createSession, digest, equalSecret, hashPassword, rateLimit, sessionCookie, sessionToken, verifyPassword, type AdminAccount } from './security.js'
+import { PRODUCT_ID } from '../shared/whatsapp.js'
+import { productPage, productPreview, unavailableProductPage } from './product-share.js'
 
 interface State { version: 1; revision: number; products: Product[]; garbage: string[] }
-interface Configuration { origin: string; email: string; setupToken: string; configured: boolean; now?: () => number; initialProducts?: Product[] }
+interface Configuration { origin: string; email: string; setupToken: string; configured: boolean; now?: () => number; initialProducts?: Product[]; whatsappNumber?: string; readStaticImage?: (name: string) => Promise<Uint8Array | null> }
 class HttpError extends Error { constructor(public status: number, message: string) { super(message) } }
 function json(body: unknown, status = 200, extra: Record<string, string> = {}) {
   return Response.json(body, { status, headers: { 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', 'X-Robots-Tag': 'noindex, nofollow', ...extra } })
@@ -55,6 +57,28 @@ export function createHandler(store: CatalogueStore, config: Configuration) {
     const url = new URL(request.url)
     const action = url.searchParams.get('action') || 'public'
     try {
+      if (['GET', 'HEAD'].includes(request.method) && ['product', 'product-preview'].includes(action)) {
+        const respond = (body: BodyInit, contentType: string, status = 200) => new Response(request.method === 'HEAD' ? null : body, { status, headers: { 'Content-Type': contentType, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } })
+        const missing = () => respond(unavailableProductPage(), 'text/html; charset=utf-8', 404)
+        const id = url.searchParams.get('id') || ''
+        if (!PRODUCT_ID.test(id)) return missing()
+        const products = config.configured ? (await state()).value.products : config.initialProducts || []
+        // Visibility is checked on every request, including image requests and
+        // authenticated visitors. A shared link never exposes a hidden item.
+        const product = products.find(p => p.id === id && p.is_active)
+        if (!product) return missing()
+        if (action === 'product') return respond(productPage(product, config.origin, config.whatsappNumber || '917990907899'), 'text/html; charset=utf-8')
+        const name = product.image_path
+        if (!/^[a-zA-Z0-9_-]+\.(webp|png|jpg|jpeg)$/.test(name)) return missing()
+        let bytes: Uint8Array | null = null
+        if (product.image_url === `/catalogue/images/${name}`) bytes = await config.readStaticImage?.(name) || null
+        else if (product.image_url === `/api/catalogue?action=image&name=${name}` && config.configured) {
+          const stream = await store.image(`images/${name}`)
+          if (stream) bytes = new Uint8Array(await new Response(stream).arrayBuffer())
+        }
+        if (!bytes?.length || bytes.length > 3 * 1024 * 1024) return missing()
+        return respond(new Uint8Array(await productPreview(bytes)), 'image/jpeg')
+      }
       if (!['GET', 'POST'].includes(request.method)) return json({ error: 'Method not allowed.' }, 405, { Allow: 'GET, POST' })
       if (request.method === 'POST' && request.headers.get('origin') !== config.origin) throw new HttpError(403, 'Request origin is not allowed.')
       if (!config.configured) {

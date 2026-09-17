@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import sharp from 'sharp'
 import { createHandler } from './handler'
 import { ConflictError, type CatalogueStore, type RecordResult } from './store'
+import type { Product } from '../src/types'
 
 class MemoryStore implements CatalogueStore {
   records = new Map<string, RecordResult<any>>()
@@ -144,4 +145,79 @@ it('persists Fibro filters and descriptions through create, edit, admin and publ
   const response=await handler(request(action,undefined,cookie))
   expect((await response.json()).products[0]).toMatchObject({...details,load_capacity:'65 ton',cover_size:'755 × 755 mm'})
  }
+})
+
+describe('public product sharing', () => {
+  const share = (id: string, image = false, method = 'GET', cookie = '') => new Request(`${origin}/api/catalogue?action=${image ? 'product-preview' : 'product'}&id=${encodeURIComponent(id)}`, { method, headers: { Cookie: cookie, 'User-Agent': 'WhatsApp/2.26' } })
+
+  it('serves crawlable product metadata and a small, baseline JPEG without a session', async () => {
+    const cookie = await register()
+    const product = (await (await save(cookie, 0, 'FRP "Cover" & Frame', undefined, undefined, { load_capacity: '5 ton', size: '24 × 24 inch', cover_size: '600 × 600 mm' })).json()).products[0]
+    const page = await handler(share(product.id))
+    expect(page.headers.get('content-type')).toBe('text/html; charset=utf-8')
+    expect(page.headers.get('cache-control')).toBe('no-store')
+    const html = await page.text()
+    expect(html).toContain('FRP &quot;Cover&quot; &amp; Frame')
+    expect(html).toContain('600 × 600 mm')
+    expect(html).toContain(`property="og:image" content="${origin}/products/${product.id}/preview.jpg?v=`)
+    expect(html).toContain('https://wa.me/917990907899?text=')
+    expect(html).not.toContain('fibro-catalogue-share-v2.jpg')
+    const preview = await handler(share(product.id, true))
+    expect(preview.status).toBe(200)
+    expect(preview.headers.get('content-type')).toBe('image/jpeg')
+    const bytes = Buffer.from(await preview.arrayBuffer())
+    expect(bytes.length).toBeLessThan(300_000)
+    const image = await sharp(bytes).metadata()
+    expect([image.width, image.height, image.format, image.isProgressive]).toEqual([1200, 630, 'jpeg', false])
+    for (const isImage of [false, true]) {
+      const head = await handler(share(product.id, isImage, 'HEAD'))
+      expect(head.status).toBe(200)
+      expect(await head.text()).toBe('')
+    }
+  })
+
+  it('reflects edited photos and details, and denies hidden or deleted products even to admins', async () => {
+    const cookie = await register()
+    const first = (await (await save(cookie, 0, 'Original cover')).json()).products[0]
+    const initialHtml = await (await handler(share(first.id))).text()
+    const initialPhoto = Buffer.from(await (await handler(share(first.id, true))).arrayBuffer())
+    clock += 60_000
+    const blue = await sharp({ create: { width: 300, height: 300, channels: 3, background: '#0044aa' } }).png().toBuffer()
+    await save(cookie, 1, 'Updated cover', first.id, blue, { load_capacity: '20 ton' })
+    const editedHtml = await (await handler(share(first.id))).text()
+    expect(editedHtml).toContain('Updated cover')
+    expect(editedHtml).toContain('20 ton')
+    expect(editedHtml.match(/property="og:image" content="([^"]+)"/)![1]).not.toBe(initialHtml.match(/property="og:image" content="([^"]+)"/)![1])
+    expect(Buffer.from(await (await handler(share(first.id, true))).arrayBuffer())).not.toEqual(initialPhoto)
+    await handler(request('toggle', { id: first.id, revision: 2, is_active: false }, cookie))
+    for (const isImage of [false, true]) {
+      const response = await handler(share(first.id, isImage, 'GET', cookie))
+      expect(response.status).toBe(404)
+      expect(await response.text()).not.toContain('Updated cover')
+    }
+    await handler(request('toggle', { id: first.id, revision: 3, is_active: true }, cookie))
+    expect((await handler(share(first.id))).status).toBe(200)
+    await handler(request('delete', { id: first.id, revision: 4 }, cookie))
+    expect((await handler(share(first.id))).status).toBe(404)
+    expect((await handler(share(first.id, true))).status).toBe(404)
+  })
+
+  it('previews bundled photos without storage and only reads approved image paths', async () => {
+    const product: Product = { id: '00000000-0000-4000-8000-000000000001', title: 'Seed cover', product_code: 'FIS-001', image_path: 'seed.webp', image_url: '/catalogue/images/seed.webp', is_active: true, price: null, display_order: 0, created_at: '2026-09-17T00:00:00Z', updated_at: '2026-09-17T00:00:00Z' }
+    const files: string[] = []
+    const bytes = await sharp({ create: { width: 100, height: 200, channels: 3, background: '#fff' } }).webp().toBuffer()
+    const offline = createHandler(store, { origin, email: '', setupToken: '', configured: false, initialProducts: [product], readStaticImage: async name => { files.push(name); return bytes } })
+    expect((await offline(share(product.id))).status).toBe(200)
+    expect((await offline(share(product.id, true))).status).toBe(200)
+    expect(files).toEqual(['seed.webp'])
+    expect(store.records.size).toBe(0)
+    for (const id of ['../private', '00000000-0000-4000-8000-000000000099']) expect((await offline(share(id, true))).status).toBe(404)
+    product.image_path = '../private.webp'
+    product.image_url = '/catalogue/images/../private.webp'
+    expect((await offline(share(product.id, true))).status).toBe(404)
+    product.image_path = 'seed.webp'
+    product.image_url = 'https://untrusted.test/seed.webp'
+    expect((await offline(share(product.id, true))).status).toBe(404)
+    expect(files).toEqual(['seed.webp'])
+  })
 })

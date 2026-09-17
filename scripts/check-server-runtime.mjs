@@ -10,7 +10,7 @@ const root = resolve(import.meta.dirname, '..')
 const temporary = await mkdtemp(join(root, 'node_modules', '.server-runtime-'))
 try {
   await writeFile(join(temporary, 'package.json'), '{"type":"module"}')
-  for (const file of ['api/catalogue.ts', 'server/handler.ts', 'server/security.ts', 'server/store.ts', 'shared/catalogue.ts']) {
+  for (const file of ['api/catalogue.ts', 'server/handler.ts', 'server/product-share.ts', 'server/security.ts', 'server/store.ts', 'shared/catalogue.ts', 'shared/whatsapp.ts']) {
     const output = ts.transpileModule(await readFile(join(root, file), 'utf8'), {
       compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
     }).outputText
@@ -29,8 +29,16 @@ try {
     assert.equal((await session.json()).code, 'SETUP_REQUIRED');
     const catalogue = await api.fetch(new Request('https://manhole-catalogue.vercel.app/api/catalogue?action=public'));
     assert.equal(catalogue.status, 200);
-    assert.ok(Array.isArray((await catalogue.json()).products));
-    console.log('Plain Node API startup and unconfigured responses passed.');
+    const products = (await catalogue.json()).products;
+    assert.ok(Array.isArray(products));
+    const product = await api.fetch(new Request('https://manhole-catalogue.vercel.app/api/catalogue?action=product&id=' + products[0].id));
+    assert.equal(product.status, 200);
+    assert.match(await product.text(), /property="og:image"/);
+    const preview = await api.fetch(new Request('https://manhole-catalogue.vercel.app/api/catalogue?action=product-preview&id=' + products[0].id));
+    assert.equal(preview.status, 200);
+    assert.equal(preview.headers.get('content-type'), 'image/jpeg');
+    assert.ok((await preview.arrayBuffer()).byteLength > 1000);
+    console.log('Plain Node API startup, public product page and photo preview passed.');
   `
   const result = spawnSync(process.execPath, ['--input-type=module', '-e', check], {
     cwd: root, stdio: 'inherit', env: { ...process.env, BLOB_READ_WRITE_TOKEN: '', BLOB_STORE_ID: '', VERCEL_OIDC_TOKEN: '', ADMIN_SETUP_TOKEN: '' },

@@ -1,3 +1,6 @@
+import { normaliseSiteUrl } from './socialMetadata'
+
+export const SITE_ORIGIN = normaliseSiteUrl(import.meta.env.VITE_SITE_URL || 'https://manhole-catalogue.vercel.app')!
 const rawPath = import.meta.env.VITE_ADMIN_PATH || '/hdhdhdhhdhdcurioo'
 export const ADMIN_PATH = '/' + rawPath.replace(/^\/+|\/+$/g, '')
 if (!/^\/[a-zA-Z0-9_-]{8,100}$/.test(ADMIN_PATH)) {

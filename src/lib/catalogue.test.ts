@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { clampQuantity, pageItems, validateProduct, whatsappUrl } from './catalogue'
 import { parseCatalogue } from './jsonCatalogue'
+import { productUrl } from '../../shared/whatsapp'
 
 describe('catalogue rules', () => {
   it('clamps quantities to 1–999', () => { expect([-1, 0, 1, 2, 999, 1000, NaN].map(clampQuantity)).toEqual([1, 1, 1, 2, 999, 999, 1]) })
@@ -8,6 +9,15 @@ describe('catalogue rules', () => {
     const url = new URL(whatsappUrl('500W LED Lens Flood Light & "Pro"', 3))
     expect(url.origin + url.pathname).toBe('https://wa.me/917990907899')
     expect(url.searchParams.get('text')).toBe('Hello, I want to buy 500W LED Lens Flood Light & "Pro". Quantity: 3. Please share the price and availability.')
+  })
+  it('includes the selected product link and refreshes it after an admin edit', () => {
+    const details = { id: '00000000-0000-4000-8000-000000000001', updated_at: '2026-09-17T00:00:00Z', product_code: 'FIS-123', load_capacity: '5 ton', size: '24 × 24 inch' }
+    const link = new URL(whatsappUrl('FRP Cover & Frame', 4, details))
+    const message = link.searchParams.get('text')!
+    for (const text of ['Quantity: 4.', 'FIS-123', '5 ton', '24 × 24 inch', `Product: https://manhole-catalogue.vercel.app/products/${details.id}?v=`]) expect(message).toContain(text)
+    expect(message.match(/https:\/\//g)).toHaveLength(1)
+    expect(productUrl('https://catalogue.test', details)).not.toBe(productUrl('https://catalogue.test', { ...details, updated_at: '2026-09-18T00:00:00Z' }))
+    expect(productUrl('https://catalogue.test', { id: '../admin' })).toBeNull()
   })
   it('shows page boundaries and ellipses without duplicates', () => {
     expect(pageItems(1, 2)).toEqual([1, 2]); expect(pageItems(6, 20)).toEqual([1, 'gap-5', 5, 6, 7, 'gap-20', 20])

@@ -1,11 +1,10 @@
-import { WHATSAPP_NUMBER } from './config'
+import { SITE_ORIGIN, WHATSAPP_NUMBER } from './config'
+import { whatsappEnquiryUrl, type EnquiryProduct } from '../../shared/whatsapp'
 export { validateProduct } from '../../shared/catalogue'
+export { clampQuantity } from '../../shared/whatsapp'
 
-export function clampQuantity(value: number) { return Math.max(1, Math.min(999, Math.trunc(value) || 1)) }
-export function whatsappUrl(title: string, quantity: number, details?: { product_code?: string | null; load_capacity?: string | null; size?: string | null }) {
-  const info = details ? [details.product_code && `Product code: ${details.product_code}`, details.load_capacity && `Load capacity: ${details.load_capacity}`, details.size && `Size: ${details.size}`].filter(Boolean).join('. ') : ''
-  const message = `Hello, I want to buy ${title}. ${info ? info + '. ' : ''}Quantity: ${clampQuantity(quantity)}. Please share the price and availability.`
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+export function whatsappUrl(title: string, quantity: number, details?: EnquiryProduct) {
+  return whatsappEnquiryUrl(WHATSAPP_NUMBER, title, quantity, details, SITE_ORIGIN)
 }
 export function pageItems(page: number, total: number): (number | string)[] {
   const pages = new Set([1, total, page - 1, page, page + 1])
