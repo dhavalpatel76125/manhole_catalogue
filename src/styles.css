@@ -33,3 +33,10 @@
 .catalogue-shell{scroll-margin-top:16px}
 .catalogue-shell>.catalogue-toolbar{border-top:0}
 @media(max-width:767px){.catalogue-header{height:auto}.catalogue-header .header-inner{grid-template-columns:minmax(0,1fr) auto;gap:0 12px;padding-bottom:12px}.catalogue-heading{grid-column:1/-1;grid-row:2;font-size:22px;line-height:1.3}.catalogue-header .contact-link{grid-column:2;grid-row:1}}
+
+/* Show the complete supplied company image without cropping its details. */
+.site-header{height:auto;min-height:160px}
+.site-header .header-inner{padding-top:8px;padding-bottom:8px;min-height:160px}
+.brand .brand-logo{display:block;width:144px;height:144px;object-fit:contain}
+.login-shell .brand-logo{width:160px;height:160px}
+@media(max-width:767px){.site-header,.site-header .header-inner{min-height:144px}.brand .brand-logo{width:128px;height:128px}.catalogue-header .header-inner{padding-bottom:12px;row-gap:4px}.login-shell .brand-logo{width:144px;height:144px}}

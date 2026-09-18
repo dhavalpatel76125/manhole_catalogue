@@ -9,7 +9,7 @@ function escape(value: unknown) {
 const brand = 'FIBRO INNOVATION SYSTEM'
 function document(title: string, metadata: string, body: string) {
   return `<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(title)}</title>${metadata}<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/product-page.css"><script src="/product-page.js" defer></script></head><body>
-  <header><a class="brand" href="/" aria-label="Fibro catalogue"><img src="/fibro-logo.png" width="88" height="88" alt=""><span>FIBRO<small>INNOVATION SYSTEM</small></span></a><a class="back" href="/">All products <span aria-hidden="true">↗</span></a></header>
+  <header><a class="brand" href="/" aria-label="Fibro catalogue"><img src="/fibro-round-logo-v1.jpg" width="144" height="144" alt="FIBRO INNOVATION SYSTEM. FRP manhole cover manufacturer. 7990907899 / 9978717496. Rajkot, Gujarat."></a><a class="back" href="/">All products <span aria-hidden="true">↗</span></a></header>
   ${body}<footer>${brand} · FRP Manhole Covers</footer></body></html>`
 }
 

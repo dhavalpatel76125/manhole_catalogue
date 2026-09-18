@@ -4,8 +4,7 @@ body { margin: 0; }
 a { color: inherit; }
 header { background: white; border-bottom: 1px solid #e0e8e3; padding: 12px max(24px, calc((100vw - 1200px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #063f7b; font-size: 28px; font-weight: 800; letter-spacing: 3px; }
-.brand img { object-fit: contain; flex-shrink: 0; }
-.brand small { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 1.6px; }
+.brand img { display: block; width: 144px; height: 144px; object-fit: contain; flex-shrink: 0; }
 .back { font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .back span { margin-left: 10px; }
 .product { max-width: 1200px; margin: 52px auto; padding: 0 24px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
@@ -39,8 +38,7 @@ footer { max-width: 1200px; padding: 26px 24px; margin: 0 auto; color: #77887f; 
 @media (max-width: 720px) {
   header { padding: 10px 16px; gap: 12px; }
   .brand { font-size: 21px; letter-spacing: 2px; gap: 8px; }
-  .brand img { width: 62px; height: 62px; }
-  .brand small { font-size: 8px; letter-spacing: .7px; margin-top: 5px; }
+  .brand img { width: 128px; height: 128px; }
   .back { font-size: 12px; }
   .back span { margin-left: 2px; }
   .product { grid-template-columns: 1fr; gap: 26px; margin: 24px auto; padding: 0 16px; }
