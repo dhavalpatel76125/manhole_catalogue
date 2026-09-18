@@ -161,7 +161,7 @@ describe('public product sharing', () => {
     expect(html).toContain('600 × 600 mm')
     expect(html).toContain(`property="og:image" content="${origin}/products/${product.id}/preview.jpg?v=`)
     expect(html).toContain('https://wa.me/917990907899?text=')
-    expect(html).not.toContain('fibro-catalogue-share-v2.jpg')
+    expect(html).not.toContain('fibro-catalogue-share-v3.jpg')
     const preview = await handler(share(product.id, true))
     expect(preview.status).toBe(200)
     expect(preview.headers.get('content-type')).toBe('image/jpeg')

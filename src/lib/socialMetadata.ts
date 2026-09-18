@@ -1,6 +1,6 @@
 export const SHARE_TITLE = 'FIBRO INNOVATION SYSTEM | Product Catalogue'
 export const SHARE_DESCRIPTION = 'Browse FRP manhole covers by load capacity and size. Choose your quantity and enquire directly on WhatsApp.'
-export const SHARE_IMAGE_PATH = '/fibro-catalogue-share-v2.jpg'
+export const SHARE_IMAGE_PATH = '/fibro-catalogue-share-v3.jpg'
 
 export function normaliseSiteUrl(value: string | undefined): string | null {
   if (!value?.trim()) return null

@@ -2,7 +2,7 @@
   "rewrites": [
     { "source": "/products/:id/preview.jpg", "destination": "/api/catalogue?action=product-preview&id=:id" },
     { "source": "/products/:id", "destination": "/api/catalogue?action=product&id=:id" },
-    { "source": "/((?!api/|assets/|catalogue/|products/|product-page.css|product-page.js|favicon.svg|fibro-logo.png|fibro-round-logo-v1.jpg|fibro-catalogue-share-v1.png|fibro-catalogue-share-v2.jpg|yorvis-share.png).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|assets/|catalogue/|products/|product-page.css|product-page.js|favicon.svg|fibro-logo.png|fibro-round-logo-v1.jpg|fibro-catalogue-share-v1.png|fibro-catalogue-share-v2.jpg|fibro-catalogue-share-v3.jpg|fibro-catalogue-share-v3.png|yorvis-share.png).*)", "destination": "/index.html" }
   ],
   "functions": { "api/catalogue.ts": { "maxDuration": 60, "includeFiles": "public/catalogue/images/**" } },
   "headers": [{ "source": "/(.*)", "headers": [

@@ -8,7 +8,7 @@ describe('static sharing metadata', () => {
     const content = (key: string) => tags.find(tag => tag.attrs.property === key || tag.attrs.name === key)?.attrs.content
     expect(content('og:title')).toBe(SHARE_TITLE)
     expect(content('og:url')).toBe(origin)
-    expect(content('og:image')).toBe('https://catalogue.fibro.test/fibro-catalogue-share-v2.jpg')
+    expect(content('og:image')).toBe('https://catalogue.fibro.test/fibro-catalogue-share-v3.jpg')
     expect(content('og:image:type')).toBe('image/jpeg')
     expect(content('og:image:width')).toBe('1200')
     expect(content('og:image:height')).toBe('630')
