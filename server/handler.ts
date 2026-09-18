@@ -203,7 +203,10 @@ export function createHandler(store: CatalogueStore, config: Configuration) {
       return json({ version: 1, revision: next.revision, products: next.products })
     } catch (error) {
       if (error instanceof HttpError) return json({ error: error.message }, error.status)
-      if (error instanceof ConflictError) return json({ error: 'Products changed in another session. Refresh and try again.' }, 409)
+      if (error instanceof ConflictError) {
+        console.warn('Catalogue storage conflict:', { action })
+        return json({ error: 'Products changed in another session. Refresh and try again.' }, 409)
+      }
       // Never return provider errors, tokens, stack traces or password hashes.
       console.error('Catalogue request failed:', error instanceof Error ? error.name : 'UnknownError')
       return json({ error: 'The service is temporarily unavailable. Please try again.' }, 503)

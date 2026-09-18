@@ -12,8 +12,15 @@ export interface CatalogueStore {
 
 export class BlobStore implements CatalogueStore {
   async read<T>(key: string): Promise<RecordResult<T> | null> {
-    const data = await get(key, { access: 'private', useCache: false })
+    // Brotli/gzip responses weaken the HTTP ETag (W/"..."). Blob's ifMatch
+    // requires the strong storage ETag, so JSON records must be read without
+    // transfer compression. Keep origin reads to avoid stale catalogue data.
+    const data = await get(key, { access: 'private', useCache: false, headers: { 'Accept-Encoding': 'identity' } })
     if (!data || data.statusCode !== 200) return null
+    if (!data.blob.etag || data.blob.etag.startsWith('W/')) {
+      await data.stream.cancel()
+      throw new Error('Storage did not return a usable record version.')
+    }
     return { value: await new Response(data.stream).json() as T, etag: data.blob.etag }
   }
   async write<T>(key: string, value: T, previous: string | null) {

@@ -46,7 +46,7 @@ describe('production API storage configuration', () => {
     const response = await session()
     expect(response.status).toBe(200)
     expect(await response.json()).toMatchObject({ authenticated: false, needsSetup: true })
-    expect(get).toHaveBeenCalledWith('auth/admin.json', { access: 'private', useCache: false })
+    expect(get).toHaveBeenCalledWith('auth/admin.json', { access: 'private', useCache: false, headers: { 'Accept-Encoding': 'identity' } })
   })
 
   it('still denies access if the configured store rejects its credentials', async () => {
