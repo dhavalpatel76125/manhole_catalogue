@@ -15,7 +15,7 @@ function document(title: string, metadata: string, body: string) {
 
 export function productPage(product: Product, origin: string, whatsappNumber: string) {
   const title = `${product.title} | ${brand}`
-  const description = [product.product_code, product.load_capacity && `Load capacity: ${product.load_capacity}`, product.size && `Size: ${product.size}`, 'Enquire on WhatsApp for price and availability.'].filter(Boolean).join(' · ')
+  const description = [product.product_code, product.category, product.load_capacity && `Load capacity: ${product.load_capacity}`, product.size && `Size: ${product.size}`, 'Enquire on WhatsApp for price and availability.'].filter(Boolean).join(' · ')
   const url = productUrl(origin, product)!
   const image = productUrl(origin, product, true)!
   const tags: [string, string][] = [
@@ -31,6 +31,7 @@ export function productPage(product: Product, origin: string, whatsappNumber: st
   return document(title, metadata, `<main class="product">
     <div class="photo"><img src="${escape(image)}" alt="${escape(product.title)}" width="1200" height="630"></div>
     <section class="details" aria-labelledby="product-title"><p class="eyebrow">${escape(product.product_code || 'FRP MANHOLE COVERS')}</p><h1 id="product-title">${escape(product.title)}</h1>
+    ${product.category ? `<span class="category-label">${escape(product.category)}</span>` : ''}
     <div class="tags">${[product.load_capacity, product.size].filter(Boolean).map(value => `<span>${escape(value)}</span>`).join('')}</div>
     <h2>Description</h2><dl>${measurements.map(([label, value]) => `<div><dt>${label}</dt><dd>${escape(value || 'Not specified')}</dd></div>`).join('')}</dl>
     ${product.price !== null ? `<p class="price">${escape(new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price))}</p>` : ''}

@@ -1,3 +1,5 @@
+import type { ProductCategory } from '../shared/categories.js'
+
 export interface Product {
   id: string
   title: string
@@ -9,10 +11,11 @@ export interface Product {
   price: number | null
   created_at: string
   updated_at: string
+  category?: ProductCategory | null
   load_capacity?: string | null
   size?: string | null
   clear_opening?: string | null
   frame_size?: string | null
   cover_size?: string | null
 }
-export type ProductInput = Pick<Product, 'title' | 'product_code' | 'is_active' | 'price' | 'load_capacity' | 'size' | 'clear_opening' | 'frame_size' | 'cover_size'>
+export type ProductInput = Pick<Product, 'title' | 'product_code' | 'is_active' | 'price' | 'category' | 'load_capacity' | 'size' | 'clear_opening' | 'frame_size' | 'cover_size'>

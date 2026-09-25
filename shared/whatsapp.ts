@@ -4,6 +4,7 @@ export interface EnquiryProduct {
   product_code?: string | null
   load_capacity?: string | null
   size?: string | null
+  category?: string | null
 }
 
 export const PRODUCT_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i
@@ -20,7 +21,7 @@ export function productUrl(origin: string, product: EnquiryProduct, image = fals
 // Keep the quantity separate so both the React cards and the public product
 // page can change it without replacing any text in the product's title.
 export function enquiryMessageParts(title: string, details?: EnquiryProduct, origin?: string) {
-  const info = details ? [details.product_code && `Product code: ${details.product_code}`, details.load_capacity && `Load capacity: ${details.load_capacity}`, details.size && `Size: ${details.size}`].filter(Boolean).join('. ') : ''
+  const info = details ? [details.category && `Category: ${details.category}`, details.product_code && `Product code: ${details.product_code}`, details.load_capacity && `Load capacity: ${details.load_capacity}`, details.size && `Size: ${details.size}`].filter(Boolean).join('. ') : ''
   const link = origin && details ? productUrl(origin, details) : null
   return {
     before: `Hello, I want to buy ${title}. ${info ? info + '. ' : ''}Quantity: `,

@@ -57,6 +57,7 @@ async function getWorkspace(page: Page) {
 async function addProduct(page: Page, name: string, file: Buffer) {
   await page.getByRole('button', { name: 'Add product', exact: true }).first().click()
   await page.getByLabel('Product title', { exact: true }).fill(name)
+  await page.getByLabel('Category', { exact: true }).selectOption('FRP Manhole Cover')
   await page.getByLabel(/Product code/).fill(name === 'Flood Light' ? 'FL-001' : 'ST-002')
   await page.locator('input[type=file]').last().setInputFiles({ name: 'light.png', mimeType: 'image/png', buffer: file })
   await expect(page.getByText(/Image ready/)).toBeVisible()

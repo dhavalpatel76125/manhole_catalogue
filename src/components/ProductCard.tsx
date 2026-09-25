@@ -16,6 +16,7 @@ export function ProductCard({ product, quantity = 1, onQuantity, preview = false
     <div className="product-body">
       <div className="product-code">{product.product_code || 'FIBRO FRP COVERS'}</div>
       <h2 title={product.title}>{product.title}</h2>
+      {product.category && <span className="category-label" aria-label={`Category: ${product.category}`}>{product.category}</span>}
       <div className="product-tags">{product.load_capacity && <span>{product.load_capacity}</span>}{product.size && <span>{product.size}</span>}</div>
       <dl className="product-description" aria-label="Description"><div><dt>Clear opening</dt><dd>{product.clear_opening || 'Not specified'}</dd></div><div><dt>Frame size</dt><dd>{product.frame_size || 'Not specified'}</dd></div><div><dt>Cover size</dt><dd>{product.cover_size || 'Not specified'}</dd></div></dl>
       <p className="price">{product.price !== null && new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price)}</p>

@@ -40,3 +40,14 @@
 .brand .brand-logo{display:block;width:144px;height:144px;object-fit:contain}
 .login-shell .brand-logo{width:160px;height:160px}
 @media(max-width:767px){.site-header,.site-header .header-inner{min-height:144px}.brand .brand-logo{width:128px;height:128px}.catalogue-header .header-inner{padding-bottom:12px;row-gap:4px}.login-shell .brand-logo{width:144px;height:144px}}
+
+/* Category controls and labels on desktop and mobile. */
+.catalogue-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:end}
+.filter-field{min-width:0}.filter-field select{width:100%;min-width:0;max-width:100%;text-overflow:ellipsis}.filter-reset{grid-column:1/-1;justify-self:start}
+.category-label{display:block;align-self:flex-start;width:fit-content;max-width:100%;margin-top:12px;padding:6px 9px;border:1px solid #cbdedb;border-radius:5px;background:#edf5f3;color:#24594e;font-size:11px;font-weight:600;line-height:1.5;overflow-wrap:anywhere}
+.table-product .category-label{margin:6px 0}
+.field-label>select{width:100%;min-width:0;max-width:100%;min-height:44px;padding:10px 12px;border:1px solid #cbd8e5;border-radius:6px;background:#fff;color:#173555;font:inherit;text-overflow:ellipsis}
+@media(max-width:900px){.catalogue-filters{grid-template-columns:1fr;gap:16px}}
+@media(max-width:599px){.field-label>select{font-size:16px}}
+
+.field-label>select:focus-visible{outline:3px solid #2282c8;outline-offset:2px}

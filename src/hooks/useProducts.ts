@@ -5,7 +5,7 @@ import { matchingProducts, productOptions } from '../lib/productFilters'
 import { DEMO_MODE, PAGE_SIZE } from '../lib/config'
 import type { Product } from '../types'
 
-export function useProducts(search: string, page: number, admin = false, capacity = '', size = '') {
+export function useProducts(search: string, page: number, admin = false, capacity = '', size = '', category = '') {
   const [all, setAll] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -32,7 +32,7 @@ export function useProducts(search: string, page: number, admin = false, capacit
     return () => { clearInterval(interval); window.removeEventListener('focus', refresh) }
   }, [refresh])
   const active = useMemo(() => all.filter(p => p.is_active), [all])
-  const filtered = useMemo(() => matchingProducts(active, search, capacity, size), [active, search, capacity, size])
+  const filtered = useMemo(() => matchingProducts(active, search, capacity, size, category), [active, search, capacity, size, category])
   return { products: filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), total: filtered.length, loading, error, refresh,
-    capacities: productOptions(active, 'load_capacity'), sizes: productOptions(matchingProducts(active, '', capacity), 'size') }
+    capacities: productOptions(matchingProducts(active, '', '', '', category), 'load_capacity'), sizes: productOptions(matchingProducts(active, '', capacity, '', category), 'size') }
 }

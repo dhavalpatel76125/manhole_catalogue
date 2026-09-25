@@ -29,7 +29,7 @@ export function productOptions(products: Product[], field: 'load_capacity' | 'si
   }
   return [...values.values()].sort((a, b) => (field === 'size' ? compareSizes(a, b) : 0) || a.localeCompare(b, undefined, { numeric: true }))
 }
-export function matchingProducts(products: Product[], search: string, capacity = '', size = '') {
+export function matchingProducts(products: Product[], search: string, capacity = '', size = '', category = '') {
   const query = search.trim().toLowerCase()
-  return products.filter(p => p.is_active && (!capacity || filterKey(p.load_capacity) === filterKey(capacity)) && (!size || filterKey(p.size) === filterKey(size)) && `${p.title} ${p.product_code || ''} ${p.load_capacity || ''} ${p.size || ''}`.toLowerCase().includes(query)).sort((a, b) => compareSizes(a.size, b.size))
+  return products.filter(p => p.is_active && (!category || p.category === category) && (!capacity || filterKey(p.load_capacity) === filterKey(capacity)) && (!size || filterKey(p.size) === filterKey(size)) && `${p.title} ${p.product_code || ''} ${p.category || ''} ${p.load_capacity || ''} ${p.size || ''}`.toLowerCase().includes(query)).sort((a, b) => compareSizes(a.size, b.size))
 }

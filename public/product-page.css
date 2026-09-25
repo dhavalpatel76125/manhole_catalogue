@@ -47,3 +47,5 @@ footer { max-width: 1200px; padding: 26px 24px; margin: 0 auto; color: #77887f; 
   .tags { margin-bottom: 26px; }
   footer { padding: 20px 16px; }
 }
+
+.category-label { display: block; width: fit-content; max-width: 100%; margin: 0 0 14px; padding: 7px 10px; border: 1px solid #cbdedb; border-radius: 6px; background: #edf5f3; color: #24594e; font-size: 13px; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }

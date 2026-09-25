@@ -35,7 +35,7 @@ async function register() {
   expect(response.status).toBe(201)
   return response.headers.get('set-cookie')!.split(';')[0]
 }
-async function save(cookie: string, revision: number, title = 'LED Flood Light', id?: string, bytes?: Uint8Array, details: Record<string, string> = {}) {
+async function save(cookie: string, revision: number, title = 'LED Flood Light', id?: string, bytes?: Uint8Array, details: Record<string, string | null> = {}) {
   const form = new FormData()
   form.append('product', JSON.stringify({ id, revision, title, product_code: 'YRV-001', price: null, is_active: true, ...details }))
   if (!id || bytes) {
@@ -220,4 +220,25 @@ describe('public product sharing', () => {
     expect((await offline(share(product.id, true))).status).toBe(404)
     expect(files).toEqual(['seed.webp'])
   })
+})
+
+it('assigns, changes and clears categories while preserving them for older editors', async () => {
+  const cookie = await register()
+  const initial = await save(cookie, 0, 'Existing unassigned cover')
+  const product = (await initial.json()).products[0]
+  expect(product.category).toBeUndefined()
+  const pageRequest = () => new Request(origin + '/api/catalogue?action=product&id=' + product.id)
+  expect(await (await handler(pageRequest())).text()).not.toContain('class="category-label"')
+  expect((await save(cookie, 1, product.title, product.id, undefined, { category: 'FRP Water Gully Cover' })).status).toBe(200)
+  expect((await save(cookie, 2, 'Edited by older tab', product.id)).status).toBe(200)
+  for (const action of ['admin', 'public']) {
+    expect((await (await handler(request(action, undefined, cookie))).json()).products[0].category).toBe('FRP Water Gully Cover')
+  }
+  expect(await (await handler(pageRequest())).text()).toContain('<span class="category-label">FRP Water Gully Cover</span>')
+  expect((await save(cookie, 3, product.title, product.id, undefined, { category: 'FRP Tiles Insert Manhole Cover' })).status).toBe(200)
+  expect((await save(cookie, 3, product.title, product.id, undefined, { category: 'FRP Manhole Cover' })).status).toBe(409)
+  expect((await save(cookie, 4, product.title, product.id, undefined, { category: 'Invalid category' })).status).toBe(400)
+  expect((await save(cookie, 4, product.title, product.id, undefined, { category: null })).status).toBe(200)
+  expect((await (await handler(request('public'))).json()).products[0].category).toBeNull()
+  expect(await (await handler(pageRequest())).text()).not.toContain('class="category-label"')
 })

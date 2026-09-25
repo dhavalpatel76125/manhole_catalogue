@@ -1,4 +1,5 @@
 import type { Product, ProductInput } from '../src/types.js'
+import { PRODUCT_CATEGORIES, type ProductCategory } from './categories.js'
 
 export function validateProduct(input: ProductInput): ProductInput {
   if (!input || typeof input.title !== 'string' || !(input.product_code === null || typeof input.product_code === 'string') || typeof input.is_active !== 'boolean') throw new Error('Invalid product fields.')
@@ -8,6 +9,11 @@ export function validateProduct(input: ProductInput): ProductInput {
   if (product_code && (product_code.length > 80 || /[\u0000-\u001f<>]/.test(product_code))) throw new Error('Product code must be 80 characters or fewer without markup or control characters.')
   if (input.price !== null && (typeof input.price !== 'number' || !Number.isFinite(input.price) || input.price < 0 || input.price > 999999999.99)) throw new Error('Enter a valid price between 0 and 999,999,999.99 or leave it blank.')
   const details: Partial<ProductInput> = {}
+  if (input.category !== undefined) {
+    const category = typeof input.category === 'string' ? input.category.trim() : input.category
+    if (category !== null && !PRODUCT_CATEGORIES.includes(category as ProductCategory)) throw new Error('Choose a valid product category.')
+    details.category = category as ProductCategory | null
+  }
   for (const key of ['load_capacity', 'size', 'clear_opening', 'frame_size', 'cover_size'] as const) {
     if (input[key] === undefined) continue
     const value = input[key]

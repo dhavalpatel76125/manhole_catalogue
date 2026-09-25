@@ -10,7 +10,7 @@ const root = resolve(import.meta.dirname, '..')
 const temporary = await mkdtemp(join(root, 'node_modules', '.server-runtime-'))
 try {
   await writeFile(join(temporary, 'package.json'), '{"type":"module"}')
-  for (const file of ['api/catalogue.ts', 'server/handler.ts', 'server/product-share.ts', 'server/security.ts', 'server/store.ts', 'shared/catalogue.ts', 'shared/whatsapp.ts']) {
+  for (const file of ['api/catalogue.ts', 'server/handler.ts', 'server/product-share.ts', 'server/security.ts', 'server/store.ts', 'shared/catalogue.ts', 'shared/whatsapp.ts', 'shared/categories.ts']) {
     const output = ts.transpileModule(await readFile(join(root, file), 'utf8'), {
       compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
     }).outputText

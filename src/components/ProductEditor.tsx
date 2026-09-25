@@ -6,10 +6,12 @@ import { ProductCard } from './ProductCard'
 import { prepareImage, imageExtension } from '../lib/images'
 import { errorMessage, validateProduct } from '../lib/catalogue'
 import type { Product, ProductInput } from '../types'
+import { PRODUCT_CATEGORIES, type ProductCategory } from '../../shared/categories'
 export function ProductEditor({ product, imageUrl, onSave, onClose, saveLabel = 'Save draft', products = [] }: { product: Product | null; imageUrl?: string; onSave: (input: ProductInput, image: Blob | null, onProgress: (value: number) => void) => Promise<void>; onClose: () => void; saveLabel?: string; products?: Product[] }) {
   const [title, setTitle] = useState(product?.title || '')
   const [code, setCode] = useState(product?.product_code || '')
   const [price, setPrice] = useState(product?.price?.toString() || '')
+  const [category, setCategory] = useState<ProductCategory | ''>(product?.category || '')
   const [details, setDetails] = useState({ load_capacity: product?.load_capacity || '', size: product?.size || '', clear_opening: product?.clear_opening || '', frame_size: product?.frame_size || '', cover_size: product?.cover_size || '' })
   const setDetail = (key: keyof typeof details, value: string) => setDetails(old => ({ ...old, [key]: value }))
   const detailDirty = Object.entries(details).some(([key, value]) => value !== (product?.[key as keyof typeof details] || ''))
@@ -25,14 +27,14 @@ export function ProductEditor({ product, imageUrl, onSave, onClose, saveLabel = 
   const fileInput = useRef<HTMLInputElement>(null)
   useEffect(() => () => { if (objectUrl.current) URL.revokeObjectURL(objectUrl.current) }, [])
   const busy = saving || processing
-  const dirty = detailDirty || title !== (product?.title || '') || code !== (product?.product_code || '') || price !== (product?.price?.toString() || '') || active !== (product?.is_active ?? true) || image !== null
+  const dirty = category !== (product?.category || '') || detailDirty || title !== (product?.title || '') || code !== (product?.product_code || '') || price !== (product?.price?.toString() || '') || active !== (product?.is_active ?? true) || image !== null
   const close = () => { if (!dirty || window.confirm('Discard these unsaved product changes?')) onClose() }
-  const draft: Product = { ...details, id: product?.id || 'preview', title: title.trim() || 'Your product title', product_code: code || null, price: price && Number.isFinite(Number(price)) ? Number(price) : null, image_url: preview, image_path: `preview.${image ? imageExtension(image) : 'webp'}`, display_order: 0, is_active: active, created_at: '', updated_at: '' }
+  const draft: Product = { ...details, category: category || null, id: product?.id || 'preview', title: title.trim() || 'Your product title', product_code: code || null, price: price && Number.isFinite(Number(price)) ? Number(price) : null, image_url: preview, image_path: `preview.${image ? imageExtension(image) : 'webp'}`, display_order: 0, is_active: active, created_at: '', updated_at: '' }
   return <Modal title={product ? 'Edit product' : 'Add product'} onClose={close} busy={busy}>
     <form onSubmit={async e => {
       e.preventDefault(); setError('')
       try {
-        const input = validateProduct({ ...details, title, product_code: code, price: price.trim() === '' ? null : Number(price), is_active: active })
+        const input = validateProduct({ ...details, category: category || null, title, product_code: code, price: price.trim() === '' ? null : Number(price), is_active: active })
         if (!product && !image) throw new Error('Choose a product image before saving.')
         setSaving(true); setUploadProgress(null); await onSave(input, image, setUploadProgress); onClose()
       } catch (e) { setError(errorMessage(e)) } finally { setSaving(false) }
@@ -40,7 +42,8 @@ export function ProductEditor({ product, imageUrl, onSave, onClose, saveLabel = 
       <div className="editor-layout"><div className="editor-form">
         <label className="field-label">Product title<input autoFocus required minLength={2} maxLength={160} value={title} onChange={e => setTitle(e.target.value)} placeholder="e.g. FRP Manhole Cover 600 × 600 mm" disabled={busy}/></label>
         <label className="field-label">Product code <small>Optional</small><input maxLength={80} value={code} onChange={e => setCode(e.target.value)} placeholder="e.g. FIS-001" disabled={busy}/></label>
-        <fieldset className="detail-section"><legend>Product filters</legend><p>Choose an existing value or type a new one. Saving the product adds it to the catalogue filters.</p>
+        <fieldset className="detail-section"><legend>Product filters</legend><p>Choose a category. For load capacity and size, choose an existing value or type a new one.</p>
+          <label className="field-label">Category<select aria-label="Category" required={!product} value={category} onChange={e => setCategory(e.target.value as ProductCategory | '')} disabled={busy}><option value="">{product ? 'Not assigned' : 'Choose a category'}</option>{PRODUCT_CATEGORIES.map(value => <option key={value} value={value}>{value}</option>)}</select></label>
           <div className="detail-fields"><label className="field-label">Load capacity<input list="capacity-options" maxLength={80} value={details.load_capacity} onChange={e => setDetail('load_capacity', e.target.value)} placeholder="e.g. 5 ton" disabled={busy}/></label>
           <label className="field-label">Size<input list="size-options" maxLength={80} value={details.size} onChange={e => setDetail('size', e.target.value)} placeholder="e.g. 24 × 24 inch" disabled={busy}/></label></div>
           <datalist id="capacity-options">{productOptions(products, 'load_capacity').map(value => <option key={value} value={value}/>)}</datalist>

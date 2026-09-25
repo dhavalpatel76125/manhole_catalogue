@@ -152,7 +152,8 @@ export function createHandler(store: CatalogueStore, config: Configuration) {
       let uploadedName: string | null = null
       if (action === 'save') {
         let clean
-        try { clean = validateProduct(input) } catch (error) { throw new HttpError(400, (error as Error).message) }
+        // Preserve categories when an older, already-open editor omits the field.
+        try { clean = validateProduct({ ...input, category: input.category === undefined ? products[index]?.category : input.category }) } catch (error) { throw new HttpError(400, (error as Error).message) }
         if (input.id && index < 0) throw new HttpError(404, 'Product not found.')
         if (!input.id && products.length >= 10000) throw new HttpError(400, 'Catalogue product limit reached.')
         const existing = products[index]
